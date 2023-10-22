@@ -4,11 +4,14 @@ import Cards from "./Cards";
 
 const Body = () => {
 	return (
-		<Grid container justifyContent={"space-evenly"}>
-			{/* <Grid item xs={10} md={5} textAlign={"center"} marginTop={"4%"}>
-				First Hello
-			</Grid> */}
-			<Grid item xs={10} md={1} textAlign={"center"} marginTop={"4%"}>
+		<Grid container justifyContent={"center"}>
+			<Grid
+				item
+				xs={10}
+				md={7}
+				textAlign={"center"}
+				marginTop={"4%"}
+				justifyContent={"space-evenly"}>
 				<Cards />
 			</Grid>
 		</Grid>

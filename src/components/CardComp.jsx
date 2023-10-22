@@ -6,22 +6,28 @@ import {
 	Typography,
 } from "@mui/material";
 
-const CardComp = ({ pokemon }) => {
+const CardComp = ({ pokemon, displayFunc, shuffleFunc }) => {
 	return (
 		<Button
 			onClick={() => {
-				console.log(pokemon.name);
+				shuffleFunc();
+				displayFunc();
+			}}
+			style={{
+				width: "20%",
+				height: "30%",
+				marginTop: "10%",
 			}}>
-			<Card sx={{ maxWidth: 345 }}>
+			<Card>
 				<CardMedia
 					component="img"
 					src={pokemon.url}
-					height="100px"
+					height="20%"
 					sx={{ height: 140 }}
 					title={pokemon.name}
 				/>
 				<CardContent>
-					<Typography gutterBottom variant="h5" component="div">
+					<Typography gutterBottom variant="h6" textAlign={"center"}>
 						{pokemon.name}
 					</Typography>
 				</CardContent>

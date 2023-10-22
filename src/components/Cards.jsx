@@ -21,7 +21,7 @@ const Cards = () => {
 				});
 
 				const pokemonDataList = await Promise.all(pokemonDataPromises);
-				console.log("Pokémon Data:", pokemonDataList);
+				// console.log("Pokémon Data:", pokemonDataList);
 				setPokemonData(pokemonDataList);
 			} catch (error) {
 				console.error("Error fetching Pokémon data:", error);
@@ -31,13 +31,36 @@ const Cards = () => {
 		fetchPokemonData();
 	}, []);
 
+	const shuffleArray = () => {
+		const shuffledArray = [...pokemonData];
+		for (let i = shuffledArray.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffledArray[i], shuffledArray[j]] = [
+				shuffledArray[j],
+				shuffledArray[i],
+			];
+		}
+		setPokemonData(shuffledArray);
+	};
+
+	const displayData = () => {
+		console.log(pokemonData);
+	};
+
 	return (
 		<>
 			{pokemonData.length === 0 ? (
 				<>Loading</>
 			) : (
 				pokemonData.map((pokemon, index) => {
-					return <CardComp pokemon={pokemon} key={index} />;
+					return (
+						<CardComp
+							pokemon={pokemon}
+							key={index}
+							shuffleFunc={shuffleArray}
+							displayFunc={displayData}
+						/>
+					);
 				})
 			)}
 		</>
