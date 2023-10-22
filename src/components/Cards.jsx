@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import CardComp from "./CardComp";
 import axios from "axios";
+import { Grid } from "@mui/material";
 
 const Cards = () => {
 	const [pokemonData, setPokemonData] = useState([]);
 
-	const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 	useEffect(() => {
 		const fetchPokemonData = async () => {
@@ -48,22 +49,21 @@ const Cards = () => {
 	};
 
 	return (
-		<>
+		<Grid container spacing={2}>
 			{pokemonData.length === 0 ? (
 				<>Loading</>
 			) : (
-				pokemonData.map((pokemon, index) => {
-					return (
+				pokemonData.map((pokemon, index) => (
+					<Grid item xs={12} sm={6} md={2} lg={2} key={index}>
 						<CardComp
 							pokemon={pokemon}
-							key={index}
 							shuffleFunc={shuffleArray}
 							displayFunc={displayData}
 						/>
-					);
-				})
+					</Grid>
+				))
 			)}
-		</>
+		</Grid>
 	);
 };
 export default Cards;
