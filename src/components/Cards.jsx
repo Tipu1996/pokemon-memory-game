@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import CardComp from "./CardComp";
 import axios from "axios";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const Cards = ({ pushClicked }) => {
 	const [pokemonData, setPokemonData] = useState([]);
-
 	const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 	useEffect(() => {
@@ -22,8 +21,17 @@ const Cards = ({ pushClicked }) => {
 				});
 
 				const pokemonDataList = await Promise.all(pokemonDataPromises);
-				console.log("Pokémon Data:", pokemonDataList);
-				setPokemonData(pokemonDataList);
+				const shuffledArray = [...pokemonDataList];
+				for (let i = shuffledArray.length - 1; i > 0; i--) {
+					const j = Math.floor(Math.random() * (i + 1));
+					[shuffledArray[i], shuffledArray[j]] = [
+						shuffledArray[j],
+						shuffledArray[i],
+					];
+				}
+				console.log("Pokémon Data:", shuffledArray);
+				setPokemonData(shuffledArray);
+				// shuffleArray();
 			} catch (error) {
 				console.error("Error fetching Pokémon data:", error);
 			}
@@ -31,15 +39,6 @@ const Cards = ({ pushClicked }) => {
 
 		fetchPokemonData();
 	}, []);
-
-	// const pushClicked = (pokemon) => {
-	// 	setClicked((prevClicked) => {
-	// 		const newClicked = [...clicked, pokemon];
-	// 		getScore(newClicked.length);
-	// 		console.log(newClicked);
-	// 		return newClicked;
-	// 	});
-	// };
 
 	const shuffleArray = () => {
 		const shuffledArray = [...pokemonData];
@@ -53,21 +52,18 @@ const Cards = ({ pushClicked }) => {
 		setPokemonData(shuffledArray);
 	};
 
-	const displayData = () => {
-		console.log(pokemonData);
-	};
-
 	return (
-		<Grid container spacing={3}>
+		<Grid container marginTop={"4%"} justifyContent={"center"}>
 			{pokemonData.length === 0 ? (
-				<>Loading</>
+				<Typography variant="h4" textAlign={"center"}>
+					Loading
+				</Typography>
 			) : (
 				pokemonData.map((pokemon, index) => (
 					<Grid item xs={12} sm={6} md={2} lg={2} key={index}>
 						<CardComp
 							pokemon={pokemon}
 							shuffleFunc={shuffleArray}
-							displayFunc={displayData}
 							pushClicked={pushClicked}
 						/>
 					</Grid>

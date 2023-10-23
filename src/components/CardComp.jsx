@@ -1,4 +1,3 @@
-import { AdsClickRounded } from "@mui/icons-material";
 import {
 	Button,
 	Card,
@@ -7,18 +6,16 @@ import {
 	Typography,
 } from "@mui/material";
 
-const CardComp = ({ pokemon, displayFunc, shuffleFunc, pushClicked }) => {
+const CardComp = ({ pokemon, shuffleFunc, pushClicked }) => {
 	return (
 		<Button
 			onClick={() => {
 				shuffleFunc();
-				// displayFunc();
 				pushClicked(pokemon.name);
 			}}
 			style={{
 				width: "100%",
 				height: "100%",
-				marginTop: "10%",
 			}}>
 			<Card
 				style={{

@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import Cards from "./Cards";
 import ScoreBody from "./ScoreBody";
 import { useState } from "react";
@@ -9,19 +9,27 @@ const Body = () => {
 
 	const pushClicked = (pokemon) => {
 		setClicked((prevClicked) => {
-			const newClicked = [...clicked, pokemon];
-			setLen(newClicked.length);
-			console.log(newClicked);
-			return newClicked;
+			if (!prevClicked.includes(pokemon)) {
+				const newClicked = [...prevClicked, pokemon];
+				setLen(newClicked.length);
+				console.log(newClicked);
+				return newClicked;
+			} else {
+				window.alert(
+					`Wrong ! you clicked ${pokemon} twice, restarting game`
+				);
+				const newClicked = [];
+				setLen(newClicked.length);
+				console.log(newClicked);
+				return newClicked;
+			}
 		});
 	};
 
 	return (
 		<Grid container>
 			<ScoreBody length={len} />
-			<Grid item>
-				<Cards pushClicked={pushClicked} />
-			</Grid>
+			<Cards pushClicked={pushClicked} />
 		</Grid>
 	);
 };
