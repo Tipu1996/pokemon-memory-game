@@ -3,7 +3,7 @@ import CardComp from "./CardComp";
 import axios from "axios";
 import { Grid } from "@mui/material";
 
-const Cards = () => {
+const Cards = ({ pushClicked }) => {
 	const [pokemonData, setPokemonData] = useState([]);
 
 	const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -22,7 +22,7 @@ const Cards = () => {
 				});
 
 				const pokemonDataList = await Promise.all(pokemonDataPromises);
-				// console.log("Pokémon Data:", pokemonDataList);
+				console.log("Pokémon Data:", pokemonDataList);
 				setPokemonData(pokemonDataList);
 			} catch (error) {
 				console.error("Error fetching Pokémon data:", error);
@@ -31,6 +31,15 @@ const Cards = () => {
 
 		fetchPokemonData();
 	}, []);
+
+	// const pushClicked = (pokemon) => {
+	// 	setClicked((prevClicked) => {
+	// 		const newClicked = [...clicked, pokemon];
+	// 		getScore(newClicked.length);
+	// 		console.log(newClicked);
+	// 		return newClicked;
+	// 	});
+	// };
 
 	const shuffleArray = () => {
 		const shuffledArray = [...pokemonData];
@@ -49,7 +58,7 @@ const Cards = () => {
 	};
 
 	return (
-		<Grid container spacing={2}>
+		<Grid container spacing={3}>
 			{pokemonData.length === 0 ? (
 				<>Loading</>
 			) : (
@@ -59,6 +68,7 @@ const Cards = () => {
 							pokemon={pokemon}
 							shuffleFunc={shuffleArray}
 							displayFunc={displayData}
+							pushClicked={pushClicked}
 						/>
 					</Grid>
 				))
