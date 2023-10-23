@@ -25,7 +25,7 @@ const ScoreBody = ({ length }) => {
 				</Grid>
 				<Grid item>
 					<Typography
-						variant="h6"
+						variant="h5"
 						style={{ textDecoration: "underline" }}>
 						Score: {length}
 					</Typography>
