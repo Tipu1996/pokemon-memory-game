@@ -19,8 +19,8 @@ const ScoreBody = ({ length }) => {
 			<Grid container justifyContent={"space-evenly"} marginTop={"2%"}>
 				<Grid item>
 					<Typography variant="h5">
-						Tap on as many Pokemons as you can without tapping on
-						the same one twice
+						Tap as many Pokemons as you can without tapping the same
+						one twice
 					</Typography>
 				</Grid>
 				<Grid item>
