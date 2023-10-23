@@ -14,7 +14,7 @@ const App = () => {
 		<ThemeProvider
 			theme={theme === "light" ? lightThemeOptions : darkThemeOptions}>
 			<CssBaseline />
-			<Body />
+			<Body theme={theme} changeTheme={changeTheme} />
 		</ThemeProvider>
 	);
 };
