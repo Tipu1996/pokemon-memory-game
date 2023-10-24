@@ -5,20 +5,34 @@ import { Grid, Typography } from "@mui/material";
 
 const Cards = ({ pushClicked }) => {
 	const [pokemonData, setPokemonData] = useState([]);
-	const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 	useEffect(() => {
+		const getRandomDistinctNumbers = () => {
+			const distinctNumbers = [];
+			while (distinctNumbers.length < 12) {
+				const randomNum = Math.floor(Math.random() * 151) + 1; // Assuming you want numbers between 1 and 151
+				if (!distinctNumbers.includes(randomNum)) {
+					distinctNumbers.push(randomNum);
+				}
+			}
+			return distinctNumbers;
+		};
+
+		const shuffledNumbers = getRandomDistinctNumbers();
+
 		const fetchPokemonData = async () => {
 			try {
-				const pokemonDataPromises = numbers.map(async (index) => {
-					const tenPokemon = await axios.get(
-						`https://pokeapi.co/api/v2/pokemon/${index}`
-					);
-					return {
-						name: tenPokemon.data.name,
-						url: tenPokemon.data.sprites.front_default,
-					};
-				});
+				const pokemonDataPromises = shuffledNumbers.map(
+					async (index) => {
+						const tenPokemon = await axios.get(
+							`https://pokeapi.co/api/v2/pokemon/${index}`
+						);
+						return {
+							name: tenPokemon.data.name,
+							url: tenPokemon.data.sprites.front_default,
+						};
+					}
+				);
 
 				const pokemonDataList = await Promise.all(pokemonDataPromises);
 				const shuffledArray = [...pokemonDataList];
@@ -31,7 +45,6 @@ const Cards = ({ pushClicked }) => {
 				}
 				console.log("Pokémon Data:", shuffledArray);
 				setPokemonData(shuffledArray);
-				// shuffleArray();
 			} catch (error) {
 				console.error("Error fetching Pokémon data:", error);
 			}
@@ -60,7 +73,7 @@ const Cards = ({ pushClicked }) => {
 				</Typography>
 			) : (
 				pokemonData.map((pokemon, index) => (
-					<Grid item xs={12} sm={6} md={2} lg={2} key={index}>
+					<Grid item xs={6} sm={4} md={2} lg={2} key={index}>
 						<CardComp
 							pokemon={pokemon}
 							shuffleFunc={shuffleArray}
