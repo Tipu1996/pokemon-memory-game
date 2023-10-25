@@ -16,7 +16,7 @@ const Body = ({ theme, changeTheme }) => {
 					window.alert(
 						`Congratulation ! you have tapped all 12 pokemons, you win the game`
 					);
-					return [];
+					window.location.reload();
 				}
 				setLen(newClicked.length);
 				console.log(newClicked);
@@ -25,10 +25,7 @@ const Body = ({ theme, changeTheme }) => {
 				window.alert(
 					`Wrong ! you clicked ${pokemon} twice, restarting game`
 				);
-				const newClicked = [];
-				setLen(newClicked.length);
-				console.log(newClicked);
-				return newClicked;
+				window.location.reload();
 			}
 		});
 	};
