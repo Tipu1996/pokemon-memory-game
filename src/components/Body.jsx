@@ -11,6 +11,13 @@ const Body = ({ theme, changeTheme }) => {
 		setClicked((prevClicked) => {
 			if (!prevClicked.includes(pokemon)) {
 				const newClicked = [...prevClicked, pokemon];
+				if (newClicked.length === 12) {
+					setLen(0);
+					window.alert(
+						`Congratulation ! you have tapped all 12 pokemons, you win the game`
+					);
+					return [];
+				}
 				setLen(newClicked.length);
 				console.log(newClicked);
 				return newClicked;
